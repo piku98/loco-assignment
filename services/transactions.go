@@ -26,8 +26,7 @@ func (service *TransactionService) UpsertTransaction(
 	client := service.postgresClient.GetClient()
 
 	if inputDetails.ParentID != nil {
-		pp, err := service.GetTransactionById(*(inputDetails.ParentID))
-		fmt.Println(pp, err)
+		_, err := service.GetTransactionById(*(inputDetails.ParentID))
 		if err != nil {
 			if _, ok := err.(customerrors.NotFoundError); ok {
 				return customerrors.NotFoundError{
