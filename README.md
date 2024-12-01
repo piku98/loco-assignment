@@ -29,3 +29,8 @@
 
     1. If id and parent_id columns are indexed, then as we are using recursive CTE, the lookup for columns will be log(n) and if the K is total number of child, grandchild, so on nodes then the time complexity will be
     O(log(n) * K)
+    2. As the query is complex, if #reads >>> #writes then we can use materialized views to precompute the result and directly search the view. and refresh the view during modifications. We can also add an index on materialized view, so time complexity will O(log(n)).
+
+### For upsert
+
+    1. With indexing, lookup will be log(n), insert will be O(1) + O(log n) (insertion into B-tree index), if update happens then O(1), total complexity will be O(log(n))
